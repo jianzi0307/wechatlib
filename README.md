@@ -8,11 +8,9 @@
 > 配置： 在Conf/config.php中添加
 
 ```php
-
 //微信应用APPID
 define('WECHAT_APPID',"xxxxxxxxxxxx");
 
 //微信应用安全码
 define('WECHAT_APPSECRET',"xxxxxxxxxxxxxxxxxxxxxx");
-
 ```
