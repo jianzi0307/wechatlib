@@ -53,7 +53,7 @@ class AccessToken {
      * @throws Exception
      */
     static private function _getAccessToken() {
-        $url = sprintf(self::$access_token_url,WECHAT_APPID,WECHAT_APPSECRET);
+        $url = sprintf(self::$access_token_url,APPID,APPSECRET);
         $accessToken = HttpClient::get($url);
         $accessToken = json_decode($accessToken,true);
         if(!isset($accessToken['access_token'])){
@@ -79,6 +79,7 @@ class AccessToken {
             if(time() - $accessToken['atime'] < $accessToken['expires_in']-10){
                 return $accessToken;
             }
+            S(self::$cache_id,null);
         }
         return false;
     }

@@ -119,7 +119,9 @@ class Qrcode {
             $post_ary['action_info']['scene']['scene_str'] = $sceneValue;
         }
         $post_data = json_encode($post_ary);
-        return HttpClient::post($query_url,$post_data);
+        $res_data = HttpClient::post($query_url,$post_data);
+        $res_data = json_decode($res_data,true);
+        return $res_data;
     }
 
     /**
@@ -137,6 +139,18 @@ class Qrcode {
             file_put_contents($filepath,$qrcode);
         }
         return $qrcode;
+    }
+
+    /**
+     * 通过ticket换取二维码的Url
+     *
+     * @param string $ticket 票据
+     * @return string
+     * @see http://mp.weixin.qq.com/wiki/18/28fc21e7ed87bec960651f0ce873ef8a.html
+     */
+    static public function getQrcodeUrlByTicket( $ticket ) {
+        $query_url = sprintf(self::$show_qrcode_url,urlencode($ticket));
+        return $query_url;
     }
 
     /**
